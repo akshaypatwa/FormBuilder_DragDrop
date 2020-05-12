@@ -1,0 +1,204 @@
+body {
+    padding-top: 20px;
+    color: #75736f;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+a {
+    color: #75736f;
+}
+
+a:focus,
+a:hover,
+a:visited,
+a:active,
+a:link {
+    text-decoration: none !important;
+    color: #75736f;
+}
+
+ul.neo-nav {
+    border: 2px solid #75736f;
+    display: inline-block;
+    -moz-padding-start: 0px;
+    -webkit-padding-start: 0px;
+    padding-start: 0px;
+    border-radius: 5px;
+}
+
+ul.neo-nav li {
+    display: inline-block;
+    list-style: none;
+}
+
+ul.neo-nav li a {
+    color: #75736f;
+    padding: 10px 30px;
+    font-weight: bold;
+    display: block;
+}
+
+ul.neo-nav li.active a {
+    color: white;
+}
+
+ul.neo-nav li:not(:first-child) {
+    border-left: 2px solid #75736f;
+}
+
+ul.neo-nav li.active {
+    background-color: #75736f;
+    color: white;
+}
+
+ul.neo-nav li a:hover,
+ul.neo-nav li a:visited,
+ul.neo-nav li a:active,
+ul.neo-nav li a:link {
+    text-decoration: none;
+}
+
+#main-content {
+    background-color: whitesmoke;
+    border-left: 1px solid #ddd;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    z-index: 1;
+    overflow-y: scroll;
+}
+
+#sideBar {
+    padding-top: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+    z-index: 2;
+}
+
+.tab-container {
+    border-bottom: 1px solid gray;
+    padding-bottom: 20px;
+}
+
+#addFieldTab {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+#fieldSettingTab {
+    padding: 20px;
+}
+
+#stdFields {}
+
+#formBuilderContent {
+    background-color: white;
+    padding: 20px;
+}
+
+.dragElement-wrapper {
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.dragElement-wrapper .drag-element {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dragElement-wrapper .drag-element i {
+    margin-right: 5px;
+}
+
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+}
+
+#chkBoxZone {
+    margin-top: 15px;
+}
+
+.input-as-label {
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    background-color: transparent;
+}
+
+.active-field {
+    background-color: #f1fafc;
+}
+
+.form-group {
+    padding: 10px;
+    position: relative;
+}
+
+.form-group i.remove-ico {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.pale {
+    opacity: 50%;
+}
+
+.sortable-formbuilder,
+.sortable-stdFields {
+    padding-left: 0px;
+    -moz-padding-start: 0px;
+    -webkit-padding-start: 0px;
+    -khtml-padding-start: 0px;
+    -o-padding-start: 0px;
+    padding-start: 0px;
+    list-style: none;
+    min-height: 40px;
+}
+
+.drop-to-add {
+    height: 40px;
+}
+
+a[data-toggle="collapse"] i.fa-plus-square-o {
+    display: none;
+}
+
+a[data-toggle="collapse"] i.fa-minus-square-o {
+    display: inline-block;
+}
+
+a[data-toggle="collapse"].collapsed i.fa-plus-square-o {
+    display: inline-block;
+}
+
+a[data-toggle="collapse"].collapsed i.fa-minus-square-o {
+    display: none;
+}
+
+.orange-txt {
+    color: orange;
+}
+#sidebar-tab-content{
+    overflow-y: scroll;
+}
