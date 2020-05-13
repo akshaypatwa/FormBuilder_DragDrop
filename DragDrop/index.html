@@ -10,8 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-animate.js" type="text/javascript"></script>
   <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/374704/sortable.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="formbuilder.js"></script>
 
+	<script src="formbuilder.js"></script>
     <link rel="stylesheet" href="formbuilder.css">
 	
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -155,11 +155,12 @@
 
                                     <input type="text" class="input-as-label" ng-model="field.Name" value="{{field.Name + (field.GetFieldSetting('Required') ? '*': '')}}" ng-change="field.ChangeFieldSetting(field.Name,'Field Label')"/>
                                     <span ng-if="field.GetFieldSetting('Required').Value" class="orange-txt">*</span>
-
-                                    <!--<label ng-if="!field.Active" for="{{field.Name.replace(' ','_') + field.id}}">{{field.Name}}<span ng-if="field.GetFieldSetting('Required')">*</span></label> -->
-
                                     <input type="text" class="form-control" id="{{field.Name.replace(' ','_') + field.id}}" value="{{field.Value}}" placeholder="{{field.Name}}">
                                     <i class ="fa fa-lg fa-minus-square-o remove-ico" ng-click="removeElement($index)" ng-if="field.Active"></i>
+
+                                    <!-- <h1>ok {{field.Name + field.Type + field.GetFieldSetting('Height').Value}}</h1> -->
+                        
+
                                 </div>
 
                                 <div class="form-group k" ng-switch-when="date" ng-class="field.Active ? 'active-field' : '' ">
