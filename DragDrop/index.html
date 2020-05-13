@@ -13,9 +13,18 @@
 
 	<script src="formbuilder.js"></script>
     <link rel="stylesheet" href="formbuilder.css">
-	
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="formbuilder_sidebar.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" /> 
+
+<!-- -----------------------Sidebar libraries---------------------- -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+                
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+
+
    <title>Drag drop form builder</title>
 </head>
 
@@ -23,36 +32,182 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3" id="sideBar">
-            <div class="tab-container text-center">
-                <ul class="neo-nav clearfix" role="tablist">
-                    <li role="presentation" class="active"><a href="#addFieldTab" id="addFieldTab_lnk" aria-controls="home" role="tab" data-toggle="tab">Add a Field</a></li><!--
 
-                    --><li role="presentation"><a href="#fieldSettingTab" id="fieldSettingTab_lnk" aria-controls="profile" role="tab" data-toggle="tab">Field Settings</a></li>
-                </ul>
-            </div>
 
-            <div class="tab-content" id="sidebar-tab-content">
-                <div role="tabpanel" class="tab-pane active" id="addFieldTab">
-                    <p>
-                        <a role="button" data-toggle="collapse" href="#stdFields">
-                            <i class="fa fa-lg fa-plus-square-o"></i><i class="fa fa-lg fa-minus-square-o"></i> STANDARD FIELDS
-                        </a>
-                    </p>
 
-                    <div class="collapse in" id="stdFields">
-                        <ul  ng-model="dragElements" class="sortable-stdFields">
-                            <li draggable="true" class="dragElement-wrapper" ng-repeat="ele in dragElements" element-draggable data-index="{{$index}}">
-                                <div class="drag-element" ng-click="addElement(ele)" >
-                                    <i class="fa fa-cogs"></i> {{ele.Name}}
-                                </div>
-                            </li>
+<!-- ------------------------------------------SideBar Panel---------------------------------------------------------- -->
+    <div>
+                <div class="wrapper d-flex align-items-stretch">
+                    <nav id="sidebar" class="active">
+                          <div class="custom-menu">
+                            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                      <i class="fa fa-bars"></i>
+                      <span class="sr-only">Toggle Menu</span>
+                    </button>
+                </div>
+                        <div class="p-4">
+                          <h1><a href="index.html" class="logo">Flash</a></h1>
+                    <ul class="list-unstyled components mb-5">
+                      <li class="active">
+                        <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+                      </li>
+                    </ul>
+
+                    <div class="tab-container text-center">
+                        <ul class="neo-nav clearfix" role="tablist">
+                            
+                            <li role="presentation" class="active"><a href="#addFieldTab" id="addFieldTab_lnk" aria-controls="home" role="tab" data-toggle="tab">New Field</a></li>
+                            <li role="presentation"><a href="#fieldSettingTab" id="fieldSettingTab_lnk" aria-controls="profile" role="tab" data-toggle="tab">Field Settings</a></li>
                         </ul>
-
                     </div>
 
+        
+
+                    <div role="tabpanel" class="tab-pane active" id="addFieldTab">
+                        <p>
+                            <a role="button" data-toggle="collapse" href="#stdFields" style="color: white;">
+                                <i class="fa fa-lg fa-plus-square-o"></i><i class="fa fa-lg fa-minus-square-o"></i> STANDARD FIELDS
+                            </a>
+                        </p>
+    
+                        <div class="collapse in" id="stdFields">
+                            <ul  ng-model="dragElements" class="sortable-stdFields">
+                                <li draggable="true" class="dragElement-wrapper" ng-repeat="ele in dragElements" element-draggable data-index="{{$index}}">
+                                    <div class="drag-element" ng-click="addElement(ele)" >
+                                        <i class="fa fa-cogs"></i> {{ele.Name}}
+                                    </div>
+                                </li>
+                            </ul>
+    
+                        </div>
+
+
+
+
+                        <div role="tabpanel" class="tab-pane" id="fieldSettingTab">
+
+
+
+
+                            <div ng-repeat="set in current_field.Settings" ng-switch on="set.Type">
+                                <div >
+        
+                                    <div class="form-group " ng-switch-when="text">
+                                        <label for="{{set.Name.replace(' ','_')}}">{{set.Name}}</label>
+                                        <input ng-change="current_field.ChangeFieldSetting(set.Value, set.Name)" type="text" ng-model="set.Value"  class="form-control" id="{{set.Name.replace(' ','_')}}" value="{{set.Value}}" placeholder="{{set.Name}}">
+                                    </div>
+        
+        
+                                    <div class="form-group" ng-switch-when="string">
+                                        <label >{{set.Name}}</label>
+                                        <br>
+                                        <span >{{set.Value}}</span>
+                                    </div>
+        
+        
+                                    <div class="form-group" ng-switch-when="label">
+                                        <label class="pale">{{set.Name}}</label>
+                                    </div>
+        
+                                    <div class="form-group " ng-switch-when="dropdown" >
+                                        <label >{{set.Name}}</label>
+                                        <select class="form-control" ng-model="set.Value" >
+                                            <option ng-repeat="op in set.PossibleValue">{{op}}</option>
+                                        </select>
+                                    </div>
+        
+                                    <div class="form-group" ng-switch-when="radio">
+                                        <div ng-repeat="val in set.PossibleValue" class="radio">
+                                            <label>
+                                                <input type="radio" name="optionsRadios"  value="{{val.Checked}}" ng-checked="val.Checked">
+                                                {{val.Text}}
+                                            </label>
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-group" ng-switch-when="dropdown_increment">
+                                        <label class="control-label">
+                                            Choices
+                                        </label>
+                                        <div ng-repeat="val in set.PossibleValue" class="radio" class="form-control">
+                                            <i class="fa fa-sort fa-lg">
+        
+                                            </i>
+                                            &nbsp;
+                                            <i class="fa fa-circle-o fa-lg">
+        
+                                            </i>
+                                            <input type="text"  value="val.Text" ng-model="val.Text">
+                                        </div>
+        
+                                    </div>
+        
+                                
+        
+                                    <div ng-switch-when="checkBoxZone">
+                                        <a role="button" data-toggle="collapse" href="#chkBoxZone">
+                                            <i class="fa fa-lg fa-plus-square-o"></i><i class="fa fa-lg fa-minus-square-o"></i> {{set.Name}}
+                                        </a>
+                                        <div class="collapse in" id="chkBoxZone">
+                                            <div class="form-group" ng-repeat="op in set.Options">
+                                                <label class="checkbox-inline" >
+                                                    <input type="checkbox" value="{{op.Value}}" ng-model="op.Value"> {{op.Name}}
+                                                </label>
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                                    <p ng-switch-default>
+                                        Unknown
+                                    </p>
+        
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+    
+                    </div>
+
+
+        
+                  </div>
+                </nav>
+        
+                <!-- Page Content  -->
+
                 </div>
-                <div role="tabpanel" class="tab-pane" id="fieldSettingTab">
+        
+            <script src="js/jquery.min.js"></script>
+            <script src="js/popper.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/main.js"></script>
+
+            
+                                                            <!-- new -->
+                                                        </div>
+                                                        <!-- new -->
+        
+<!-- ------------------------------------------------------------------------------------------------------------------------------------ --> 
+
+
+        <!-- <div class="col-md-3" id="sideBar"> -->
+            <!-- <div class="tab-container text-center">
+                <ul class="neo-nav clearfix" role="tablist">
+                    
+                    <li role="presentation" class="active"><a href="#addFieldTab" id="addFieldTab_lnk" aria-controls="home" role="tab" data-toggle="tab">Add a Field</a></li>
+                    <li role="presentation"><a href="#fieldSettingTab" id="fieldSettingTab_lnk" aria-controls="profile" role="tab" data-toggle="tab">Field Settings</a></li>
+                </ul>
+            </div> -->
+            <div>
+            <div class="tab-content" id="sidebar-tab-content">
+                      <div role="tabpanel" class="tab-pane" id="fieldSettingTab">
+
+
+
 
                     <div ng-repeat="set in current_field.Settings" ng-switch on="set.Type">
                         <div >
@@ -107,7 +262,7 @@
 
                             </div>
 
-
+                        
 
                             <div ng-switch-when="checkBoxZone">
                                 <a role="button" data-toggle="collapse" href="#chkBoxZone">
@@ -125,19 +280,17 @@
                             <p ng-switch-default>
                                 Unknown
                             </p>
+
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
+
+    
         <div class="col-md-9 text-center" id="main-content">
-            <ul class="neo-nav" role="tablist">
-                <li role="presentation" class="active"><a href="#addFieldTab" aria-controls="home" role="tab" data-toggle="tab">Form Builder</a></li><!--
-                 --><li role="presentation"><a href="#" aria-controls="profile" role="tab" data-toggle="tab">Entity & Field Permission</a></li><!--
-                 --><li role="presentation" class=""><a href="#" aria-controls="home" role="tab" data-toggle="tab">Detail Builder</a></li><!--
-                 --><li role="presentation"><a href="#" aria-controls="profile" role="tab" data-toggle="tab">Workflows</a></li>
-            </ul>
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active text-left" id="formBuilderContent">
@@ -146,6 +299,7 @@
                         <i class="fa fa-pencil fa-lg"></i>
                         <span class="lead">Employee</span>
                     </p>
+                    
 
                     <div class="container-fluid" id="dropZone">
                         <ul class="row sortable-formbuilder" element-drop  ui-sortable="formbuilderSortableOpts" ng-model="formFields" id="sortable-formbuilder-ul">
@@ -153,12 +307,21 @@
 
                                 <div class="form-group "  ng-switch-when="text" ng-class="field.Active ? 'active-field' : '' " >
 
-                                    <input type="text" class="input-as-label" ng-model="field.Name" value="{{field.Name + (field.GetFieldSetting('Required') ? '*': '')}}" ng-change="field.ChangeFieldSetting(field.Name,'Field Label')"/>
-                                    <span ng-if="field.GetFieldSetting('Required').Value" class="orange-txt">*</span>
-                                    <input type="text" class="form-control" id="{{field.Name.replace(' ','_') + field.id}}" value="{{field.Value}}" placeholder="{{field.Name}}">
+                                    <!-- <input type="text" class="input-as-label" ng-model="field.Name" value="{{field.Name + (field.GetFieldSetting('Required') ? '*': '')}}" ng-change="field.ChangeFieldSetting(field.Name,'Field Label')"/> -->
+                                    <!-- <span ng-if="field.GetFieldSetting('Required').Value" class="orange-txt">*</span> -->
+                                    <!-- <input type="text" class="form-control" id="{{field.Name.replace(' ','_') + field.id}}" value="{{field.Value}}" placeholder="{{field.Name}}"> -->
                                     <i class ="fa fa-lg fa-minus-square-o remove-ico" ng-click="removeElement($index)" ng-if="field.Active"></i>
 
                                     <!-- <h1>ok {{field.Name + field.Type + field.GetFieldSetting('Height').Value}}</h1> -->
+
+                                    <div class="card">
+                                        <img src="avatar.png" alt="Avatar" style="width:50%">
+                                        <div class="container">
+                                          <h4><b>John Doe</b></h4> 
+                                          <p>Architect & Engineer</p> 
+                                        </div>
+                                      </div>
+                                      
                         
 
                                 </div>

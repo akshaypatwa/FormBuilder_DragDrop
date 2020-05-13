@@ -1,12 +1,12 @@
 body {
     padding-top: 20px;
     color: #75736f;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     display: none;
-}
+} */
 
 
 a {
@@ -69,7 +69,7 @@ ul.neo-nav li a:link {
     padding-top: 20px;
     padding-bottom: 20px;
     z-index: 1;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 #sideBar {
@@ -199,6 +199,6 @@ a[data-toggle="collapse"].collapsed i.fa-minus-square-o {
 .orange-txt {
     color: orange;
 }
-#sidebar-tab-content{
+/* #sidebar-tab-content{
     overflow-y: scroll;
-}
+} */
